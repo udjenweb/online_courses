@@ -1,6 +1,12 @@
 # REST-full-Api-Server
 
-# To begin
+# Quick Start
+    git clone https://github.com/udjenweb/online_courses.git
+    cd online_courses
+    docker-compose up -d
+    docker exec -it server_online_couses python manage.py app install
+    using login 'root', password 'root'
+    http://localhost:5000/index.html
 
 ### using docker
 ##### start server:
