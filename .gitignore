@@ -1,0 +1,18 @@
+.vagrant
+*.pyc
+.idea
+.ropeproject
+env
+var
+*.mo
+*.sql
+.DS_Store
+# KDE directory preferences
+.directory
+.git/
+__pycache__
+.cache/
+
+# postgress database from docker container:
+data/*
+!data/.dummy

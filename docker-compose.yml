@@ -1,0 +1,41 @@
+version: "2"
+services:
+    app:
+        build: .
+        container_name: server_online_couses
+        restart: always
+        networks:
+            - default
+        volumes:
+            - .:/app
+        working_dir: /app
+        environment:
+            DEFAULT_CONFIG: debug
+            WEB_SERVER_BIND_ADDRESS: 0.0.0.0:5000
+
+            DATABASE_HOST: db
+            DATABASE_USER: postgres
+            DATABASE_PASSWORD: postgres
+            DATABASE_NAME: postgres
+
+        command: ['bash', '-c', '
+                  pip install -r requirements.txt &&
+                  python manage.py db upgrade &&
+                  python run.py']
+        ports:
+            - "5000:5000"
+    db:
+        image: postgres:9.4
+        restart: always
+        networks:
+            - default
+        # volumes:  # it is not supported inside vagrant container (FS-fat32)!
+        #     - ./data/pgdata:/var/lib/postgresql/data/pgdata
+        ports:
+            - "5032:5432"
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
+            POSTGRES_DB: postgres
+            PGDATA: /var/lib/postgresql/data/pgdata
+
